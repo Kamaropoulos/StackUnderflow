@@ -10,11 +10,9 @@ class Answer extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('uid')->unique();
-            $table->integer('qid')->unique();
+            $table->integer('uid');
+            $table->integer('qid');
             $table->text('body');
-            $table->integer('upvotes');
-            $table->integer('downvotes');
             $table->timestamps();
         });
     }

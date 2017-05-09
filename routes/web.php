@@ -19,9 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/', 'QuestionsController@ListAll');
+Route::get('/', 'QuestionsController@index');
 
-Route::get('/questions', 'QuestionsController@ListAll');
+Route::get('/questions', 'QuestionsController@ListQuestions');
 
 Route::get('/questions/ask', 'QuestionsController@AskForm');
 
@@ -34,5 +34,7 @@ Route::get('/questions/edit/{id}', 'QuestionsController@EditForm');
 Route::post('/questions/edit/{id}', 'QuestionsController@Edit');
 
 Route::post('/questions/{id}/answer', 'QuestionsController@Answer');
+
+Route::get('/questions/{id}/upvote', 'QuestionsController@Upvote');
 
 Route::get('/questions/{id}/downvote', 'QuestionsController@Downvote');

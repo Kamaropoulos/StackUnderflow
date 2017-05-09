@@ -10,14 +10,12 @@ class Question extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('uid')->unique();
+            $table->integer('uid');
             $table->string('title');
             $table->text('body');
-            $table->string('tags');
-            $table->integer('upvotes');
-            $table->integer('downvotes');
-            $table->integer('views');
-            $table->integer('accepted_aid')->unsigned();
+            $table->string('tags')->nullable();
+            $table->integer('views')->default(0);
+            $table->integer('accepted_aid')->unsigned()->nullable();
             $table->timestamps();
         });
     }
