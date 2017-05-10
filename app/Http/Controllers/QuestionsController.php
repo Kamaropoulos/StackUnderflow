@@ -106,10 +106,8 @@ class QuestionsController extends Controller
                     ->count();
 
                 $answers_votes[$i] = $answer_votes['up'] - $answer_votes['down'];
-
                 $i++;
             }
-
             if ($question) {
                 return View::make('question')
                     ->with('question', $question)

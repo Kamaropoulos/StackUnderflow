@@ -7,11 +7,13 @@
     <div class="container">
         <div class="row">
             <div class="list-group-item">
-                <button type="button" class="btn btn-link btn-sm"  onClick="location.href=window.location.href+'/upvote'">
+                <button type="button" class="btn btn-link btn-sm"
+                        onClick="location.href=window.location.href+'/upvote'">
                     <span class="glyphicon glyphicon-chevron-up"></span>
                 </button>
                 <span class="label label-primary">{{ $question_votes }}</span>
-                <button type="button" class="btn btn-link btn-sm"  onClick="location.href=window.location.href+'/downvote'">
+                <button type="button" class="btn btn-link btn-sm"
+                        onClick="location.href=window.location.href+'/downvote'">
                     <span class="glyphicon glyphicon-chevron-down"></span>
                 </button>
 
@@ -31,17 +33,20 @@
 
             @if (isset($answers))
                 @if ($answers)
+                    <?php $author_counter = 1; ?>
                     @foreach ($answers as $answer)
-                        <?php $author_counter = 1; ?>
+
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 {{--<a class="glyphicon glyphicon-chevron-up"></a>--}}
-                                <button type="button" class="btn btn-link btn-sm"  onClick="location.href=window.location.href+'/answer/{{ $answer->id }}/upvote'">
+                                <button type="button" class="btn btn-link btn-sm"
+                                        onClick="location.href=window.location.href+'/answer/{{ $answer->id }}/upvote'">
                                     <span class="glyphicon glyphicon-chevron-up"></span>
                                 </button>
                                 <span class="label label-primary">{{ $answers_votes[$author_counter] }}</span>
                                 {{--<a class="glyphicon glyphicon-chevron-down"></a>--}}
-                                <button type="button" class="btn btn-link btn-sm"  onClick="location.href=window.location.href+'/downvote'">
+                                <button type="button" class="btn btn-link btn-sm"
+                                        onClick="location.href=window.location.href+'/downvote'">
                                     <span class="glyphicon glyphicon-chevron-down"></span>
                                 </button>
                                 <div class="pull-right">
