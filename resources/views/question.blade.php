@@ -7,9 +7,13 @@
     <div class="container">
         <div class="row">
             <div class="list-group-item">
-                <i class="glyphicon glyphicon-chevron-up"></i>
-                <span class="label label-primary">3</span>
-                <i class="glyphicon glyphicon-chevron-down"></i>
+                <button type="button" class="btn btn-link btn-sm"  onClick="location.href=window.location.href+'/upvote'">
+                    <span class="glyphicon glyphicon-chevron-up"></span>
+                </button>
+                <span class="label label-primary">{{ $question_votes }}</span>
+                <button type="button" class="btn btn-link btn-sm"  onClick="location.href=window.location.href+'/downvote'">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
 
                 <b>{{ $question->title }}</b>
                 <hr>
@@ -31,9 +35,15 @@
                         <?php $author_counter = 1; ?>
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <i class="glyphicon glyphicon-chevron-up"></i>
-                                <span class="label label-primary">3</span>
-                                <i class="glyphicon glyphicon-chevron-down"></i>
+                                {{--<a class="glyphicon glyphicon-chevron-up"></a>--}}
+                                <button type="button" class="btn btn-link btn-sm"  onClick="location.href=window.location.href+'/answer/{{ $answer->id }}/upvote'">
+                                    <span class="glyphicon glyphicon-chevron-up"></span>
+                                </button>
+                                <span class="label label-primary">{{ $answers_votes[$author_counter] }}</span>
+                                {{--<a class="glyphicon glyphicon-chevron-down"></a>--}}
+                                <button type="button" class="btn btn-link btn-sm"  onClick="location.href=window.location.href+'/downvote'">
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                </button>
                                 <div class="pull-right">
                                     Answered by {{ $answer_authors[$author_counter]->name }}
                                     at {{ $question->created_at->toDayDateTimeString() }}

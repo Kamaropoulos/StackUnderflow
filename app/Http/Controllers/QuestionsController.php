@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Questions;
 use App\Answers;
 use App\User;
+use App\Votes;
 use DB;
 use View;
 use Carbon\Carbon;
@@ -17,14 +18,29 @@ class QuestionsController extends Controller
     {
         $questions = Questions::all()->sortByDesc("created_at");
         $authors = array();
+        $questions_votes = array();
         $i = 1;
         foreach ($questions as $question) {
             $authors[$i] = User::find($question->uid);
+
+            $question_votes['up'] = DB::table('votes')
+                ->where('qid', '=', $question->id)
+                ->where('isUp', '=', true)
+                ->count();
+
+            $question_votes['down'] = DB::table('votes')
+                ->where('qid', '=', $question->id)
+                ->where('isUp', '=', false)
+                ->count();
+
+            $questions_votes[$i] = $question_votes['up'] - $question_votes['down'];
+
             $i++;
         }
         return View::make('home')
             ->with('questions', $questions)
-            ->with('authors', $authors);
+            ->with('authors', $authors)
+            ->with('questions_votes', $questions_votes);
     }
 
     public function ListQuestions()
@@ -60,11 +76,37 @@ class QuestionsController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+        $questions_votes['up'] = DB::table('votes')
+            ->where('qid', '=', $id)
+            ->where('isUp', '=', true)
+            ->count();
+
+        $questions_votes['down'] = DB::table('votes')
+            ->where('qid', '=', $id)
+            ->where('isUp', '=', false)
+            ->count();
+
+        $questions_votes_total = $questions_votes['up'] - $questions_votes['down'];
+
         if ($answers) {
             $answer_authors = array();
+            $answers_votes = array();
             $i = 1;
             foreach ($answers as $answer) {
                 $answer_authors[$i] = User::find($answer->uid);
+
+                $answer_votes['up'] = DB::table('votes')
+                    ->where('aid', '=', $answer->id)
+                    ->where('isUp', '=', true)
+                    ->count();
+
+                $answer_votes['down'] = DB::table('votes')
+                    ->where('aid', '=', $answer->id)
+                    ->where('isUp', '=', false)
+                    ->count();
+
+                $answers_votes[$i] = $answer_votes['up'] - $answer_votes['down'];
+
                 $i++;
             }
 
@@ -73,7 +115,9 @@ class QuestionsController extends Controller
                     ->with('question', $question)
                     ->with('answers', $answers)
                     ->with('author', User::find($question->uid))
-                    ->with('answer_authors', $answer_authors);
+                    ->with('answer_authors', $answer_authors)
+                    ->with('question_votes', $questions_votes_total)
+                    ->with('answers_votes', $answers_votes);
             } else {
                 abort(404);
             }
@@ -81,7 +125,8 @@ class QuestionsController extends Controller
             if ($question) {
                 return View::make('question')
                     ->with('question', $question)
-                    ->with('author', User::find($question->uid));
+                    ->with('author', User::find($question->uid))
+                    ->with('question_votes', $questions_votes_total);
             } else {
                 abort(404);
             }

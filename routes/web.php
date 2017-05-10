@@ -25,20 +25,26 @@ Route::get('/questions', 'QuestionsController@index');
 
 Route::get('/questions/ask', 'QuestionsController@AskForm');
 
-Route::post('/questions/ask', 'QuestionsController@Ask');
+
 
 Route::get('/questions/{id}', 'QuestionsController@ViewQuestion');
 
-Route::get('/questions/edit/{id}', 'QuestionsController@EditForm');
+Route::group([ 'middleware' => ['auth']], function() {
 
-Route::post('/questions/edit/{id}', 'QuestionsController@Edit');
+    Route::post('/questions/ask', 'QuestionsController@Ask');
 
-Route::post('/questions/{id}/answer', 'AnswersController@Answer');
+    Route::get('/questions/edit/{id}', 'QuestionsController@EditForm');
 
-Route::get('/questions/{id}/upvote', 'VotesController@UpvoteQuestion');
+    Route::post('/questions/edit/{id}', 'QuestionsController@Edit');
 
-Route::get('/questions/{id}/downvote', 'VotesController@DownvoteQuestion');
+    Route::post('/questions/{id}/answer', 'AnswersController@Answer');
 
-Route::get('/questions/{id}/answer/{id}/upvote', 'VotesController@UpvoteAnswer');
+    Route::get('/questions/{id}/upvote', 'VotesController@UpvoteQuestion');
 
-Route::get('/questions/{id}/answer/{id}/downvote', 'VotesController@DownvoteAnswer');
+    Route::get('/questions/{id}/downvote', 'VotesController@DownvoteQuestion');
+
+    Route::get('/questions/{id}/answer/{aid}/upvote', 'VotesController@UpvoteAnswer');
+
+    Route::get('/questions/{id}/answer/{aid}/downvote', 'VotesController@DownvoteAnswer');
+
+});

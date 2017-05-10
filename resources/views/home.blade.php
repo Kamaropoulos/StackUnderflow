@@ -8,10 +8,6 @@
             <?php $author_counter = 1; ?>
             @foreach($questions as $question)
                 <div class="list-group-item">
-                    <i class="glyphicon glyphicon-chevron-up"></i>
-                    <span class="label label-primary">3</span>
-                    <i class="glyphicon glyphicon-chevron-down"></i>
-
                     <a href="/questions/{{$question->id}}">{{ $question->title }}</a>
                     <hr>
                     {{ $question->body }}
