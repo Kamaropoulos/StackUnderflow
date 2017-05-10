@@ -9,11 +9,16 @@ class Answer extends Migration
     public function up()
     {
         Schema::create('answers', function (Blueprint $table) {
+
+            $table->engine = 'InnoDB';
+
             $table->increments('id');
             $table->integer('uid');
             $table->integer('qid');
             $table->text('body');
             $table->timestamps();
+
+            $table->foreign('uid')->references('id')->on('users');
         });
     }
 

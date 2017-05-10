@@ -5,15 +5,20 @@
 @section('content')
     <div class="container">
         <div class="row">
+            <?php $author_counter = 1; ?>
             @foreach($questions as $question)
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><a href="/questions/{{$question->id}}">{{ $question->title }}</a></div>
-                    <div class="panel-body">
+                <div class="list-group-item">
+                    <i class="glyphicon glyphicon-chevron-up"></i>
+                    <span class="label label-primary">3</span>
+                    <i class="glyphicon glyphicon-chevron-down"></i>
+
+                    <a href="/questions/{{$question->id}}">{{ $question->title }}</a>
+                    <hr>
                         {{ $question->body }}
-                    </div>
-                </div>
-            </div>
+                    <br><hr>
+                    <div class="pull-right">Asked by {{ $authors[$author_counter]->name }} at {{ $question->created_at->toDayDateTimeString() }}</div><br>
+                    <?php ++$author_counter; ?>
+                </div><br>
             @endforeach
         </div>
     </div>

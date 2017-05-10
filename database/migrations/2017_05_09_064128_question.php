@@ -9,6 +9,9 @@ class Question extends Migration
     public function up()
     {
         Schema::create('questions', function (Blueprint $table) {
+
+            $table->engine = 'InnoDB';
+
             $table->increments('id');
             $table->integer('uid');
             $table->string('title');
@@ -17,6 +20,8 @@ class Question extends Migration
             $table->integer('views')->default(0);
             $table->integer('accepted_aid')->unsigned()->nullable();
             $table->timestamps();
+
+            $table->foreign('uid')->references('id')->on('users');
         });
     }
 

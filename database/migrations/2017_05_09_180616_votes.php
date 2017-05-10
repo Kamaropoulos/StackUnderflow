@@ -14,12 +14,17 @@ class Votes extends Migration
     public function up()
     {
         Schema::create('votes', function (Blueprint $table) {
+
+            $table->engine = 'InnoDB';
+
             $table->increments('id');
             $table->integer('uid')->unsigned();
             $table->integer('aid')->unsigned()->nullable();
             $table->integer('qid')->unsigned()->nullable();
             $table->boolean('isUp');
             $table->timestamps();
+
+            $table->foreign('uid')->references('id')->on('users');
         });
     }
 

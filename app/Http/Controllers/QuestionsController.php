@@ -3,19 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Questions;
+use App\User;
 use DB;
 use View;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
 {
     public function index(){
-        return View::make('home')->with('questions', Questions::all());
+        $questions = Questions::all()->sortByDesc("created_at");
+        $authors = array();
+        $i = 1;
+        foreach ($questions as $question) {
+            $authors[$i] = User::find($question->uid);
+            $i++;
+        }
+        return View::make('home')
+            ->with('questions', $questions)
+            ->with('authors', $authors);
     }
 
     public function ListQuestions(){
-        return View::make('home')->with('question', Questions::find(1));
+        //return View::make('home')->with('question', Questions::find(1));
+        //$question = Question::find(1);
+        //return view('home', compact())
     }
 
     public function AskForm(){
@@ -29,15 +42,22 @@ class QuestionsController extends Controller
         $userid = Auth::id();
 
         $id = DB::table('questions')->insertGetId(
-        	                        ['title' => $title, 'body' => $body, 'tags' => $tags, 'uid' => $userid]
+            ['title' => $title, 'body' => $body, 'tags' => $tags, 'uid' => $userid, 'created_at' => Carbon::now()]
         );
 
         return redirect('/questions/'.$id);
     }
 
     public function ViewQuestion($id){
-        $result['question'] = Questions::find($id);
-        return View::make('question')->with('question', Questions::find($id));
+        $question = Questions::find($id);
+        if ($question) {
+            return View::make('question')
+                ->with('question', $question)
+                ->with('author', User::find($question->uid));
+        } else {
+            abort(404);
+        }
+
     }
 
     public function EditForm(){

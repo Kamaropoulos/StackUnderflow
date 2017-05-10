@@ -12,9 +12,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('votes.scss') }}" type="text/scss" rel="stylesheet">
+    <link rel="stylesheet/css" type="text/css" href="{{ asset('votes.css') }}">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"
 
     <!-- Scripts -->
+
+    {{--<script type='text/javascript' src='{{ asset('js/votes.js') }}'></script>--}}
+
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
