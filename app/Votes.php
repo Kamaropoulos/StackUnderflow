@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Votes extends Model
 {
     protected $table = 'votes';
+    public $timestamps = true;
 }

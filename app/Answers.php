@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Answers extends Model
 {
     protected $table = 'answers';
+    public $timestamps = true;
 }

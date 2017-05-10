@@ -17,11 +17,11 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'QuestionsController@index');
 
 Route::get('/', 'QuestionsController@index');
 
-Route::get('/questions', 'QuestionsController@ListQuestions');
+Route::get('/questions', 'QuestionsController@index');
 
 Route::get('/questions/ask', 'QuestionsController@AskForm');
 

@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Questions;
 use DB;
+use View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
 {
     public function index(){
-        return view('home');
+        return View::make('home')->with('questions', Questions::all());
     }
 
     public function ListQuestions(){
-        return view('home');
+        return View::make('home')->with('question', Questions::find(1));
     }
 
     public function AskForm(){
@@ -34,8 +36,8 @@ class QuestionsController extends Controller
     }
 
     public function ViewQuestion($id){
-        $result['question'] = questions::find($id);
-        return view('question',$result['question']);
+        $result['question'] = Questions::find($id);
+        return View::make('question')->with('question', Questions::find($id));
     }
 
     public function EditForm(){

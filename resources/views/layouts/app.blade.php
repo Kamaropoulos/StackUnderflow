@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('votes.scss') }}" type="text/scss" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
