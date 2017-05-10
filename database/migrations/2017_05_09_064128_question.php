@@ -20,8 +20,6 @@ class Question extends Migration
             $table->integer('views')->default(0);
             $table->integer('accepted_aid')->unsigned()->nullable();
             $table->timestamps();
-
-            $table->foreign('uid')->references('id')->on('users');
         });
     }
 

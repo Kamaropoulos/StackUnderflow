@@ -23,8 +23,6 @@ class Votes extends Migration
             $table->integer('qid')->unsigned()->nullable();
             $table->boolean('isUp');
             $table->timestamps();
-
-            $table->foreign('uid')->references('id')->on('users');
         });
     }
 

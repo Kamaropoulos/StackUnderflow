@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Questions;
+use App\Answers;
 use App\User;
 use DB;
 use View;
@@ -50,12 +51,35 @@ class QuestionsController extends Controller
 
     public function ViewQuestion($id){
         $question = Questions::find($id);
-        if ($question) {
-            return View::make('question')
-                ->with('question', $question)
-                ->with('author', User::find($question->uid));
+        $answers = Answers::where('qid','=', $id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        if ($answers){
+            $answer_authors = array();
+            $i = 1;
+            foreach ($answers as $answer) {
+                $answer_authors[$i] = User::find($answer->uid);
+                $i++;
+            }
+
+            if ($question) {
+                return View::make('question')
+                    ->with('question', $question)
+                    ->with('answers', $answers)
+                    ->with('author', User::find($question->uid))
+                    ->with('answer_authors', $answer_authors);
+            } else {
+                abort(404);
+            }
         } else {
-            abort(404);
+            if ($question) {
+                return View::make('question')
+                    ->with('question', $question)
+                    ->with('author', User::find($question->uid));
+            } else {
+                abort(404);
+            }
         }
 
     }

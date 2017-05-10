@@ -17,8 +17,6 @@ class Answer extends Migration
             $table->integer('qid');
             $table->text('body');
             $table->timestamps();
-
-            $table->foreign('uid')->references('id')->on('users');
         });
     }
 
