@@ -33,8 +33,12 @@ Route::get('/questions/edit/{id}', 'QuestionsController@EditForm');
 
 Route::post('/questions/edit/{id}', 'QuestionsController@Edit');
 
-Route::post('/questions/{id}/answer', 'QuestionsController@Answer');
+Route::post('/questions/{id}/answer', 'AnswersController@Answer');
 
-Route::get('/questions/{id}/upvote', 'QuestionsController@Upvote');
+Route::get('/questions/{id}/upvote', 'VotesController@UpvoteQuestion');
 
-Route::get('/questions/{id}/downvote', 'QuestionsController@Downvote');
+Route::get('/questions/{id}/downvote', 'VotesController@DownvoteQuestion');
+
+Route::get('/questions/{id}/answer/{id}/upvote', 'VotesController@UpvoteAnswer');
+
+Route::get('/questions/{id}/answer/{id}/downvote', 'VotesController@DownvoteAnswer');

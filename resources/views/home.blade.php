@@ -14,9 +14,12 @@
 
                     <a href="/questions/{{$question->id}}">{{ $question->title }}</a>
                     <hr>
-                        {{ $question->body }}
-                    <br><hr>
-                    <div class="pull-right">Asked by {{ $authors[$author_counter]->name }} at {{ $question->created_at->toDayDateTimeString() }}</div><br>
+                    {{ $question->body }}
+                    <br>
+                    <hr>
+                    <div class="pull-right">Asked by {{ $authors[$author_counter]->name }}
+                        at {{ $question->created_at->toDayDateTimeString() }}</div>
+                    <br>
                     <?php ++$author_counter; ?>
                 </div><br>
             @endforeach

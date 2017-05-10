@@ -35,9 +35,11 @@
                                 <span class="label label-primary">3</span>
                                 <i class="glyphicon glyphicon-chevron-down"></i>
                                 <div class="pull-right">
-                                    Answered by {{ $answer_authors[$author_counter]->name }} at {{ $question->created_at->toDayDateTimeString() }}
+                                    Answered by {{ $answer_authors[$author_counter]->name }}
+                                    at {{ $question->created_at->toDayDateTimeString() }}
                                     <?php ++$author_counter; ?>
-                                </div><hr>
+                                </div>
+                                <hr>
                                 {{$answer->body}}
 
                             </div>
@@ -58,6 +60,19 @@
                 </div>
             @endif
 
+            <div class="panel panel-default">
+                <h3>&nbsp;&nbsp;Your Answer</h3>
+                <hr>
+                <div class="panel-body">
+                    <form action="/questions/{{ $question->id }}/answer" method="POST" role="form">
+                        <div class="form-group">
+                            <textarea class="form-control" id="body" name="body"></textarea>
+                        </div>
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
 
         </div>
     </div>

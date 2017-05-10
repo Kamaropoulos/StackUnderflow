@@ -13,7 +13,8 @@ use Illuminate\Http\Request;
 
 class QuestionsController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $questions = Questions::all()->sortByDesc("created_at");
         $authors = array();
         $i = 1;
@@ -26,17 +27,20 @@ class QuestionsController extends Controller
             ->with('authors', $authors);
     }
 
-    public function ListQuestions(){
+    public function ListQuestions()
+    {
         //return View::make('home')->with('question', Questions::find(1));
         //$question = Question::find(1);
         //return view('home', compact())
     }
 
-    public function AskForm(){
+    public function AskForm()
+    {
         return view('ask');
     }
 
-    public function Ask(Request $request){
+    public function Ask(Request $request)
+    {
         $title = $request->input('title');
         $body = $request->input('body');
         $tags = $request->input('tags');
@@ -46,16 +50,17 @@ class QuestionsController extends Controller
             ['title' => $title, 'body' => $body, 'tags' => $tags, 'uid' => $userid, 'created_at' => Carbon::now()]
         );
 
-        return redirect('/questions/'.$id);
+        return redirect('/questions/' . $id);
     }
 
-    public function ViewQuestion($id){
+    public function ViewQuestion($id)
+    {
         $question = Questions::find($id);
-        $answers = Answers::where('qid','=', $id)
+        $answers = Answers::where('qid', '=', $id)
             ->orderBy('created_at', 'desc')
             ->get();
 
-        if ($answers){
+        if ($answers) {
             $answer_authors = array();
             $i = 1;
             foreach ($answers as $answer) {
@@ -84,15 +89,18 @@ class QuestionsController extends Controller
 
     }
 
-    public function EditForm(){
+    public function EditForm()
+    {
 
     }
 
-    public function Edit(){
+    public function Edit()
+    {
 
     }
 
-    public function Answer(){
+    public function Answer()
+    {
 
     }
 
@@ -101,7 +109,8 @@ class QuestionsController extends Controller
 
     }
 
-    public function Downvote(){
+    public function Downvote()
+    {
 
     }
 }
