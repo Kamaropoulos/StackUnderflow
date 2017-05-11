@@ -2,6 +2,7 @@
 
 
 @section('pageTitle', $question->title)
+@section('askURL', 'ask')
 
 @section('content')
     <div class="container">

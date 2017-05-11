@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('pageTitle', 'Home')
+@section('askURL', 'questions/ask')
+
 
 @section('content')
     <div class="container">
@@ -8,7 +10,7 @@
             <?php $author_counter = 1; ?>
             @foreach($questions as $question)
                 <div class="list-group-item">
-                    <a href="/questions/{{$question->id}}">{{ $question->title }}</a>
+                    <a href="questions/{{$question->id}}">{{ $question->title }}</a>
                     <hr>
                     {{ $question->body }}
                     <br>
