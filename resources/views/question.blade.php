@@ -46,7 +46,7 @@
                                 <span class="label label-primary">{{ $answers_votes[$author_counter] }}</span>
                                 {{--<a class="glyphicon glyphicon-chevron-down"></a>--}}
                                 <button type="button" class="btn btn-link btn-sm"
-                                        onClick="location.href=window.location.href+'/downvote'">
+                                        onClick="location.href=window.location.href+'/answer/{{ $answer->id }}/downvote'">
                                     <span class="glyphicon glyphicon-chevron-down"></span>
                                 </button>
                                 <div class="pull-right">
@@ -79,7 +79,7 @@
                 <h3>&nbsp;&nbsp;Your Answer</h3>
                 <hr>
                 <div class="panel-body">
-                    <form action="/questions/{{ $question->id }}/answer" method="POST" role="form">
+                    <form action="../questions/{{ $question->id }}/answer" method="POST" role="form">
                         <div class="form-group">
                             <textarea class="form-control" id="body" name="body"></textarea>
                         </div>
