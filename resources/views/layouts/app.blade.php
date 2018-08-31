@@ -11,13 +11,13 @@
     <title>@yield('pageTitle') - StackUnderflow</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet/css" type="text/css" href="{{ asset('votes.css') }}">
+    <link href="{{ asset('css/app.css', true) }}" rel="stylesheet">
+    <link rel="stylesheet/css" type="text/css" href="{{ asset('votes.css', true) }}">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
     <!-- Scripts -->
 
-    {{--<script type='text/javascript' src='{{ asset('js/votes.js') }}'></script>--}}
+    {{--<script type='text/javascript' src='{{ asset('js/votes.js', true) }}'></script>--}}
 
     <script>
         window.Laravel = {!! json_encode([
@@ -91,6 +91,6 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/app.js', true) }}"></script>
 </body>
 </html>
